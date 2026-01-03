@@ -1,4 +1,4 @@
 tags = [
     "Math",
-    "Binary Search"
+    "Binary Search",
 ]
