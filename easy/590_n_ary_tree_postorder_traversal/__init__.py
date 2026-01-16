@@ -1,0 +1,5 @@
+tags = [
+    "Stack",
+    "Tree",
+    "Depth - First Search",
+]
