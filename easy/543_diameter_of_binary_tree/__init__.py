@@ -1,0 +1,5 @@
+tags = [
+    "Tree",
+    "Depth-First Search",
+    "Binary Tree",
+]
