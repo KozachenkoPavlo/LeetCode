@@ -15,9 +15,6 @@ class Solution:
         result = []
 
         def helper(node: 'Node') -> None:
-            if not node:
-                return
-
             if node.children:
                 for child in node.children:
                     helper(child)
