@@ -10,5 +10,12 @@ class Node:
 
 class Solution:
     def maxDepth(self, root: 'Node') -> int:
-        # TODO: optimal solution
-        pass
+        """
+        Took this solution from community
+        """
+        if not root:
+            return 0
+        if not root.children:
+            return 1
+
+        return 1 + max([self.maxDepth(child) for child in root.children])
