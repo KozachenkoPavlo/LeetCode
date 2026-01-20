@@ -11,5 +11,5 @@ class TreeNode:
 
 class Solution:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        # TODO: optimal solution
+        # TODO: Optimal solution
         pass

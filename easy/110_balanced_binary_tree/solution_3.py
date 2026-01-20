@@ -11,5 +11,5 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        # TODO: optimal solution
+        # TODO: Optimal solution
         pass
