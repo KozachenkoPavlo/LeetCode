@@ -2,6 +2,6 @@ tags = [
     "String",
     "Backtracking",
     "Tree",
-    "Depth - First Search",
+    "Depth-First Search",
     "Binary Tree",
 ]

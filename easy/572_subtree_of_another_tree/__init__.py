@@ -1,6 +1,6 @@
 tags = [
     "Tree",
-    "Depth - First Search",
+    "Depth-First Search",
     "String Matching",
     "Binary Tree",
     "Hash Function",

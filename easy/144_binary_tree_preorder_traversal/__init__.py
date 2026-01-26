@@ -1,6 +1,6 @@
 tags = [
     "Stack",
     "Tree",
-    "Depth - First Search",
+    "Depth-First Search",
     "Binary Tree",
 ]

@@ -1,6 +1,6 @@
 tags = [
     "Tree",
-    "Depth - First Search",
+    "Depth-First Search",
     "Binary Search Tree",
     "Binary Tree",
     "Weekly Contest 110",
