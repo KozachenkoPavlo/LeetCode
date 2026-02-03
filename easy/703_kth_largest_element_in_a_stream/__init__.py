@@ -1,0 +1,8 @@
+tags = [
+    "Tree",
+    "Design",
+    "Binary Search Tree",
+    "Heap (Priority Queue)",
+    "Binary Tree",
+    "Data Stream",
+]
