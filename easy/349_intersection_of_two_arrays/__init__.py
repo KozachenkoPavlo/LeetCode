@@ -1,0 +1,7 @@
+tags = [
+    "Array",
+    "Hash Table",
+    "Two Pointers",
+    "Binary Search",
+    "Sorting",
+]
