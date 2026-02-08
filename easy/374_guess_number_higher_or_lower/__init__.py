@@ -1,0 +1,4 @@
+tags = [
+    "Binary Search",
+    "Interactive",
+]
