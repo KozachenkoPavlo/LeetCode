@@ -11,6 +11,7 @@ class Solution:
             if nums[i] + nums[i + 1] > target:
                 break
 
-            c += bisect_left(nums[i + 1:], target - nums[i])
+            index = bisect_left(nums, target - nums[i], i + 1)
+            c += index - (i + 1)
 
         return c
