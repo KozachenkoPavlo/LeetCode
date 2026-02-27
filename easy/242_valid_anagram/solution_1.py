@@ -4,10 +4,7 @@ class Solution:
             d = {}
 
             for c in word:
-                if c in d.keys():
-                    d[c] += 1
-                else:
-                    d[c] = 1
+                d[c] = d.get(c, 0) + 1
 
             return d
 
