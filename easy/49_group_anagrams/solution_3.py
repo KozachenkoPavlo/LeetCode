@@ -1,17 +1,13 @@
+from collections import defaultdict
 from typing import List
 
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        registry = {}
+        registry = defaultdict(list)
 
-        while strs:
-            s = strs.pop()
-            s_key = "".join(sorted(s))
-
-            if s_key in registry:
-                registry[s_key].append(s)
-            else:
-                registry[s_key] = [s]
+        for s in strs:
+            key = "".join(sorted(s))
+            registry[key].append(s)
 
         return list(registry.values())
