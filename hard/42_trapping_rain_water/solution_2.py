@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    # Time: O(n)
+    # Space: O(n)
     def trap(self, height: List[int]) -> int:
         result = 0
         stack = []
