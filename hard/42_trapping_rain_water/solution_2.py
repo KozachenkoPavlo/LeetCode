@@ -9,13 +9,15 @@ class Solution:
         stack = []
 
         for i in range(len(height)):
-            while len(stack) > 0 and height[stack[-1]] < height[i]:
-                result += min(height[stack[0]], height[i]) - height[stack[-1]]
+            while stack and height[i] > height[stack[-1]]:
+                bottom_height = height[stack.pop()]
 
-                if len(stack) > 1:
-                    result += (stack[-1] - stack[-2] - 1) * (min(height[i], height[stack[0]]) - height[stack[-1]])
+                if not stack:
+                    break
 
-                stack.pop()
+                width = i - stack[-1] - 1
+                h = min(height[stack[-1]], height[i]) - bottom_height
+                result += width * h
 
             stack.append(i)
 
