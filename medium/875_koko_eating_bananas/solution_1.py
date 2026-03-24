@@ -1,4 +1,3 @@
-import math
 from typing import List
 
 
@@ -11,7 +10,7 @@ class Solution:
             s = 0
 
             for pile in piles:
-                s += math.ceil(pile / k)
+                s += (pile + k - 1) // k
 
             if s > h:
                 l = k + 1
