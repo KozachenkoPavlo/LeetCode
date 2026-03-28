@@ -19,10 +19,10 @@ class TimeMap:
 
     # Time: O(1)
     def set(self, key: str, value: str, timestamp: int) -> None:
-        if key in self.time_map.keys():
-            self.time_map[key].append([timestamp, value])
-        else:
-            self.time_map[key] = [[timestamp, value]]
+        if key not in self.time_map.keys():
+            self.time_map[key] = []
+
+        self.time_map[key].append([timestamp, value])
 
     # Time: O(log N)
     def get(self, key: str, timestamp: int) -> str:
