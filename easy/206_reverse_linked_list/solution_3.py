@@ -12,6 +12,8 @@ class ListNode:
 
 # Tail Recursion
 class Solution:
+    # Time: O(n)
+    # Space: O(1)
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def recurse(node: Optional[ListNode], previous: Optional[ListNode] = None) -> Optional[ListNode]:
             if node is None:
