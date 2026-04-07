@@ -12,6 +12,8 @@ class ListNode:
 
 # Bottom-Up Recursion
 class Solution:
+    # Time: O(N)
+    # Space: O(1)
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if head is None or head.next is None:
             return head
