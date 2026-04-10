@@ -4,6 +4,8 @@ from data_structures import ListNode
 
 
 class Solution:
+    # Time: O(N + M), N: len(list1), M: len(list2)
+    # Space: O(1)
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         if not list1:
             return list2
