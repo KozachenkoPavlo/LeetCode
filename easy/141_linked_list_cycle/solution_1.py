@@ -8,11 +8,9 @@ class Solution:
         slow = head
         fast = head
 
-        while fast and fast.next and fast.next.next:
+        while fast and fast.next:
             fast = fast.next.next
-
-            if slow.next is not None:
-                slow = slow.next
+            slow = slow.next
 
             if slow == fast:
                 return True
