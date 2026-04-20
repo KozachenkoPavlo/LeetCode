@@ -4,6 +4,8 @@ from data_structures import ListNode
 
 
 class Solution:
+    # Time: O(N + M), where N is len(headA) and M is len(headB)
+    # Space: O(1), we have only two pointers
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         pointer_a = headA
         pointer_b = headB
