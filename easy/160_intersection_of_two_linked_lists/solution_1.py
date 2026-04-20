@@ -6,23 +6,16 @@ from data_structures import ListNode
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         pointer_a = headA
-        finished_a = False
         pointer_b = headB
-        finished_b = False
 
-        while pointer_a and pointer_b:
-            if pointer_a == pointer_b:
-                return pointer_a
-
+        while pointer_a != pointer_b:
             pointer_a = pointer_a.next
             pointer_b = pointer_b.next
 
-            if pointer_a is None and not finished_a:
-                finished_a = True
+            if not pointer_a and pointer_b:
                 pointer_a = headB
 
-            if pointer_b is None and not finished_b:
-                finished_b = True
+            if not pointer_b and pointer_a:
                 pointer_b = headA
 
-        return None
+        return pointer_a
