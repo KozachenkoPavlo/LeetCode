@@ -1,0 +1,6 @@
+tags = [
+    "Hash Table",
+    "Linked List",
+    "Design",
+    "Doubly-Linked List",
+]
