@@ -1,0 +1,6 @@
+tags = [
+    "Linked List",
+    "Divide and Conquer",
+    "Heap (Priority Queue)",
+    "Merge Sort",
+]
