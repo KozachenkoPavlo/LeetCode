@@ -2,11 +2,13 @@ from typing import Generator
 
 
 class Solution:
+    # Time: O(N)
+    # Space: O(log N)
     def isHappy(self, n: int) -> bool:
         def get_digits(number: int) -> Generator[int]:
-            while number:
-                yield number % 10
-                number = number // 10
+            while number > 0:
+                number, digit = divmod(number, 10)
+                yield digit
 
         registry = set()
 
