@@ -6,17 +6,17 @@ class Solution:
         registry_s = {}
         registry_t = {}
 
-        for i in range(len(s)):
-            if s[i] not in registry_s:
-                registry_s[s[i]] = t[i]
+        for i, j in zip(s, t):
+            if i not in registry_s:
+                registry_s[i] = j
             else:
-                if registry_s[s[i]] != t[i]:
+                if registry_s[i] != j:
                     return False
 
-            if t[i] not in registry_t:
-                registry_t[t[i]] = s[i]
+            if j not in registry_t:
+                registry_t[j] = i
             else:
-                if registry_t[t[i]] != s[i]:
+                if registry_t[j] != i:
                     return False
 
         return True
