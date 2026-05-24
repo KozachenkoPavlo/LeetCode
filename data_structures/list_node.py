@@ -29,4 +29,10 @@ class ListNode:
         return result
 
     def __str__(self) -> str:
+        return f"Node({self.val})"
+
+    def __repr__(self):
+        return self.__str__()
+
+    def show_list(self) -> str:
         return " -> ".join([str(element) for element in ListNode.list_node_to_list(self)])
