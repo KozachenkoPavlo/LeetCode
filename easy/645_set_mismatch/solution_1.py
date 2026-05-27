@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N)
+    # Space: O(N)
     def findErrorNums(self, nums: List[int]) -> List[int]:
         n = len(nums)
 

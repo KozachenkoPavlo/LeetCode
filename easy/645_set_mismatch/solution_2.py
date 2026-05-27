@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N)
+    # Space: O(1)
     def findErrorNums(self, nums: List[int]) -> List[int]:
         duplicate = -1
         lost = -1
