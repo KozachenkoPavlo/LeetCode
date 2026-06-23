@@ -49,7 +49,7 @@ class HashString:
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        result = "0" * (len(s) + 1)
+        result = (0, len(s) + 1)
 
         min_distance = len(t)
         p1, p2 = 0, min_distance
@@ -59,8 +59,8 @@ class Solution:
 
         while True:
             while t_hash in s_hash:
-                if len(result) > p2 - p1:
-                    result = s[p1:p2]
+                if result[1] - result[0] > p2 - p1:
+                    result = (p1, p2)
 
                 s_hash.remove(s[p1])
                 p1 += 1
@@ -71,8 +71,8 @@ class Solution:
             s_hash.add(s[p2])
             p2 += 1
 
-        if len(result) <= len(s):
-            return result
+        if result[1] - result[0] <= len(s):
+            return s[*result]
 
         return ""
 
