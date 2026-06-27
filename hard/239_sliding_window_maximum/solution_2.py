@@ -1,9 +1,10 @@
+from collections import deque
 from typing import List
 
 
 class DecreasingMonotonicStack:
     def __init__(self, init_list: list[int] | None = None):
-        self.stack = []
+        self.stack = deque()
 
         if init_list is None:
             return
@@ -19,16 +20,10 @@ class DecreasingMonotonicStack:
 
     def remove(self, element: int):
         if self.stack[0] == element:
-            del self.stack[0]
+            self.stack.popleft()
 
     def get_biggest(self):
         return self.stack[0]
-
-    def __str__(self):
-        return self.stack
-
-    def __repr__(self):
-        return self.__str__()
 
 
 class Solution:
