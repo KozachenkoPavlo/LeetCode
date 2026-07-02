@@ -1,3 +1,4 @@
+from collections import deque
 from typing import Optional, List
 
 from data_structures import TreeNode
@@ -8,26 +9,25 @@ class Solution:
         if root is None:
             return []
 
-        stack = [root]
-        temp_stack = []
+        queue = deque([root])
         result = []
 
-        while stack:
-            temp_result = []
+        while queue:
+            iteration_count = len(queue)
+            level_result = []
 
-            while stack:
-                temp_stack.append(stack.pop())
-
-            while temp_stack:
-                node = temp_stack.pop()
-                temp_result.append(node.val)
+            while iteration_count > 0:
+                node = queue.popleft()
+                level_result.append(node.val)
 
                 if node.left:
-                    stack.append(node.left)
+                    queue.append(node.left)
 
                 if node.right:
-                    stack.append(node.right)
+                    queue.append(node.right)
 
-            result.append(temp_result)
+                iteration_count -= 1
+
+            result.append(level_result)
 
         return result
