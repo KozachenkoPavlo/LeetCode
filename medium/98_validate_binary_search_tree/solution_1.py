@@ -10,29 +10,18 @@ class Solution:
         if root is None:
             return True
 
-        stack = [{"node": root, "min": -math.inf, "max": math.inf}]
+        stack = [(root, -math.inf, math.inf)]
 
         while stack:
-            obj = stack.pop()
-            node = obj["node"]
-            min_value = obj["min"]
-            max_value = obj["max"]
+            node, min_value, max_value = stack.pop()
 
             if not (min_value < node.val < max_value):
                 return False
 
             if node.left:
-                stack.append({
-                    "node": node.left,
-                    "min": min_value,
-                    "max": min(max_value, node.val)
-                })
+                stack.append((node.left, min_value, node.val))
 
             if node.right:
-                stack.append({
-                    "node": node.right,
-                    "min": max(min_value, node.val),
-                    "max": max_value
-                })
+                stack.append((node.right, node.val, max_value))
 
         return True
