@@ -12,7 +12,12 @@ class LeetCodeAPIRepository(LeetCodeRepository):
 
     def get_task_by_id(self, task_id: int) -> Task:
         url = f"{self.base_url}/problem/{task_id}"
-        data = requests.get(url).json()
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            raise Exception(f"Status code is {response.status_code}")
+
+        data = response.json()
 
         return Task(
             id=data["questionId"],
