@@ -11,16 +11,10 @@ class Solution:
         result = []
 
         for word in words:
-            row = ""
+            word_set = set(word.lower())
 
-            for index in range(len(rows)):
-                if word[0].lower() in rows[index]:
-                    row = rows[index]
-
-            for char in word:
-                if char.lower() not in row:
-                    break
-            else:
-                result.append(word)
+            for row in rows:
+                if word_set.issubset(row):
+                    result.append(word)
 
         return result
