@@ -4,9 +4,9 @@ from typing import List
 class Solution:
     def findWords(self, words: List[str]) -> List[str]:
         rows = [
-            "qwertyuiop",
-            "asdfghjkl",
-            "zxcvbnm",
+            set("qwertyuiop"),
+            set("asdfghjkl"),
+            set("zxcvbnm"),
         ]
         result = []
 
