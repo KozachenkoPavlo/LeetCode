@@ -1,0 +1,7 @@
+tags = [
+    "Array",
+    "Hash Table",
+    "Divide and Conquer",
+    "Tree",
+    "Binary Tree",
+]
