@@ -6,4 +6,4 @@ class Solution:
         for i in range(0, len(result), k):
             groups.append(result[i:i + k])
 
-        return "-".join([group[::-1] for group in groups[::-1]])
+        return "-".join(groups)[::-1]
