@@ -23,16 +23,6 @@ class Solution:
 
         return f"{hours}:{minutes:02}"
 
-    def get_bits_count(self, number: int) -> int:
-        result = 0
-
-        while number:
-            if number & 1:
-                result += 1
-            number >>= 1
-
-        return result
-
     def map_num_into_hour_minute(self, number: int) -> Tuple[list[bool], list[bool]]:
         hours_minutes = [False] * 10
         index = 9
@@ -50,7 +40,7 @@ class Solution:
         result = []
 
         for i in range(1024):
-            if turnedOn == self.get_bits_count(i):
+            if turnedOn == i.bit_count():
                 time_str = self.bin_to_time(*self.map_num_into_hour_minute(i))
 
                 if time_str is not None:
