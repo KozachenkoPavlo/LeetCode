@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 
 class Solution:
-    def bin_to_time(self, hour_map: List[bool], minute_map: List[bool]):
+    def bin_to_time(self, hour_map: List[bool], minute_map: List[bool]) -> str | None:
         start_hour = 8
         start_minute = 32
         hours = 0
@@ -18,11 +18,8 @@ class Solution:
                 minutes += start_minute
             start_minute >>= 1
 
-        if hours > 11:
-            raise RuntimeError(f"Invalid hour: {hours}")
-
-        if minutes > 59:
-            raise RuntimeError(f"Invalid minute: {minutes}")
+        if hours > 11 or minutes > 59:
+            return None
 
         return f"{hours}:{minutes:02}"
 
@@ -54,9 +51,9 @@ class Solution:
 
         for i in range(1024):
             if turnedOn == self.get_bits_count(i):
-                try:
-                    result.append(self.bin_to_time(*self.map_num_into_hour_minute(i)))
-                except RuntimeError:
-                    continue
+                time_str = self.bin_to_time(*self.map_num_into_hour_minute(i))
+
+                if time_str is not None:
+                    result.append(time_str)
 
         return result
