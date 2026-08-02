@@ -1,22 +1,13 @@
-import os
-
-from cli.commands.command import Command
-from cli.repositories.leetcode_api_repository import LeetCodeAPIRepository
-from cli.repositories.leetcode_repository import LeetCodeRepository
-from cli.services.package_creator import PackageCreator
+from cli.commands import Command
+from cli.errors import PackageAlreadyExistsError
+from cli.repositories import TaskRepository
+from cli.services import PackageCreatorService
 
 
 class CreatePackageCommand(Command):
-    def __init__(self, leetcode_repository: LeetCodeRepository, package_creator: PackageCreator):
-        self.leetcode_repository = leetcode_repository
+    def __init__(self, repository: TaskRepository, package_creator: PackageCreatorService):
+        self.repository = repository
         self.package_creator = package_creator
-
-    @classmethod
-    def create(cls) -> "CreatePackageCommand":
-        return cls(
-            leetcode_repository=LeetCodeAPIRepository(os.environ["LEET_CODE_API_URL"]),
-            package_creator=PackageCreator(os.environ["ROOT_DIR"]),
-        )
 
     @staticmethod
     def __parce_task_id(*args):
@@ -30,6 +21,9 @@ class CreatePackageCommand(Command):
 
     def execute(self, *args) -> None:
         task_id = self.__parce_task_id(*args)
-        task = self.leetcode_repository.get_task_by_id(task_id)
+        task = self.repository.get_task_by_id(task_id)
 
-        self.package_creator.create(task)
+        try:
+            self.package_creator.create(task)
+        except PackageAlreadyExistsError:
+            print(f"Package for task(ID: {task.frontend_id}) was already created")

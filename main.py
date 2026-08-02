@@ -1,16 +1,26 @@
 import sys
 
-from env import init_env
-from cli.commands.command_loader import load_command
+from cli.commands.factories import build_command
+from cli.errors import CliError
+from config import Config
 
 
 def main():
-    init_env()
-    command_name, *args = sys.argv[1:]
+    args = sys.argv[1:]
+    if not args:
+        print("usage: main.py <command> [args...]", file=sys.stderr)
+        return 2
 
-    command = load_command(command_name)
-    command.execute(*args)
+    name, *rest = args
+    try:
+        command = build_command(name, Config.load())
+    except CliError as error:
+        print(error, file=sys.stderr)
+        return 2
+
+    command.execute(*rest)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

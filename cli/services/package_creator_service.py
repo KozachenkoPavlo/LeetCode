@@ -1,27 +1,38 @@
 import os
+import re
+import shutil
 from typing import List
 
+from cli.errors import PackageAlreadyExistsError
 from cli.models.task import Task
 
 
-class PackageCreator:
+class PackageCreatorService:
     def __init__(self, root_dir: str):
         self.root_dir = root_dir
 
     def create(self, task: Task) -> None:
         package_path = self._package_path(task)
 
-        os.makedirs(package_path)
-        self._create_init_file(package_path, task.tags)
-        self._create_solution_file(package_path)
+        try:
+            os.makedirs(package_path)
+        except FileExistsError as error:
+            raise PackageAlreadyExistsError(f"Task(ID: {task.frontend_id}) is already created") from error
+
+        try:
+            self._create_init_file(package_path, task.tags)
+            self._create_solution_file(package_path)
+        except Exception:
+            shutil.rmtree(package_path, ignore_errors=True)
+            raise
 
     def _difficulty_path(self, task: Task) -> str:
         return os.path.join(self.root_dir, task.difficulty.lower())
 
     def _package_name(self, task: Task) -> str:
-        clear_title = task.title.lower().replace(".", "").replace(" ", "_")
+        slug = re.sub(r"[^a-z0-9]+", "_", task.title.lower()).strip("_")
 
-        return "_".join([task.frontend_id, clear_title])
+        return f"{task.frontend_id}_{slug}"
 
     def _package_path(self, task: Task) -> str:
         return os.path.join(self._difficulty_path(task), self._package_name(task))
