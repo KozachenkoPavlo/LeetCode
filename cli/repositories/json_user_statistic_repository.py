@@ -2,7 +2,6 @@ import json
 import os
 import re
 from datetime import date
-from io import TextIOWrapper
 from typing import List
 
 from cli.models.user_profile import RankSnapshot, SubmissionSnapshot
@@ -68,6 +67,7 @@ class JsonUserStatisticRepository(UserStatisticRepository):
         filename = self._filename(snapshot.username)
         os.makedirs(os.path.dirname(filename), exist_ok=True)
 
+        to_write = json.dumps([statistic.to_dict() for statistic in statistics], indent=2)
+
         with open(filename, "w") as file:
-            file: TextIOWrapper
-            json.dump([statistic.to_dict() for statistic in statistics], file, indent=2)
+            file.write(to_write)
