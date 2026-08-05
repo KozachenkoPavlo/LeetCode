@@ -1,11 +1,14 @@
 import json
 import os
+import re
 from datetime import date
 from io import TextIOWrapper
 from typing import List
 
 from cli.models.user_profile import RankSnapshot, SubmissionSnapshot
 from cli.repositories.user_statistic_repository import UserStatisticRepository
+
+SAFE_USERNAME = re.compile(r"^[A-Za-z0-9._-]{1,64}$")
 
 
 class JsonUserStatisticRepository(UserStatisticRepository):
@@ -16,6 +19,9 @@ class JsonUserStatisticRepository(UserStatisticRepository):
         return os.path.join(self.root_dir, "out", "rank")
 
     def _filename(self, username: str) -> str:
+        if not SAFE_USERNAME.match(username):
+            raise ValueError(f"Unsafe username for a file name: {username!r}")
+
         return os.path.join(self._directory(), f"{username}.json")
 
     def _load_raw(self, username: str) -> list:
