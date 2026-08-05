@@ -1,0 +1,7 @@
+tags = [
+    "Dynamic Programming",
+    "Tree",
+    "Depth-First Search",
+    "Binary Tree",
+    "DP on Trees",
+]
