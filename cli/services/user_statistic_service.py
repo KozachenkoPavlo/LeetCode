@@ -15,7 +15,9 @@ class UserStatisticService:
         snapshot = RankSnapshot(
             date=date.today(),
             username=profile.username,
-            rank=profile.rank
+            rank=profile.rank,
+            accepted_submissions=profile.accepted_submissions,
+            total_submissions=profile.total_submissions,
         )
         self.statistic_repository.save(snapshot)
 

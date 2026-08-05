@@ -1,2 +1,2 @@
 from .task import Task
-from .user_profile import UserProfile, RankSnapshot
+from .user_profile import UserProfile, RankSnapshot, SubmissionSnapshot

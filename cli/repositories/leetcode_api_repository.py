@@ -1,7 +1,7 @@
 import requests
 
 from cli.errors import ObjectNotFoundError, LeetCodeError
-from cli.models import Task, UserProfile
+from cli.models import Task, UserProfile, SubmissionSnapshot
 from cli.repositories.profile_repository import ProfileRepository
 from cli.repositories.task_repository import TaskRepository
 
@@ -35,6 +35,16 @@ class LeetCodeAPIRepository(TaskRepository, ProfileRepository):
         return UserProfile(
             username=data["username"],
             rank=data["profile"]["ranking"],
+            accepted_submissions=[SubmissionSnapshot(
+                difficulty=submission["difficulty"],
+                count=submission["count"],
+                submissions=submission["submissions"],
+            ) for submission in data["submitStats"]["acSubmissionNum"]],
+            total_submissions=[SubmissionSnapshot(
+                difficulty=submission["difficulty"],
+                count=submission["count"],
+                submissions=submission["submissions"],
+            ) for submission in data["submitStats"]["totalSubmissionNum"]],
         )
 
     def get_task_by_id(self, task_id: int) -> Task:

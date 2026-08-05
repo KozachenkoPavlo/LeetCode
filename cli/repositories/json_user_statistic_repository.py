@@ -4,7 +4,7 @@ from datetime import date
 from io import TextIOWrapper
 from typing import List
 
-from cli.models.user_profile import RankSnapshot
+from cli.models.user_profile import RankSnapshot, SubmissionSnapshot
 from cli.repositories.user_statistic_repository import UserStatisticRepository
 
 
@@ -35,6 +35,16 @@ class JsonUserStatisticRepository(UserStatisticRepository):
                 username=statistic["username"],
                 rank=statistic["rank"],
                 date=date.fromisoformat(statistic["date"]),
+                accepted_submissions=[SubmissionSnapshot(
+                    difficulty=submission["difficulty"],
+                    count=submission["count"],
+                    submissions=submission["submissions"]
+                ) for submission in statistic["accepted_submissions"]],
+                total_submissions=[SubmissionSnapshot(
+                    difficulty=submission["difficulty"],
+                    count=submission["count"],
+                    submissions=submission["submissions"]
+                ) for submission in statistic["total_submissions"]],
             ))
 
         return result
