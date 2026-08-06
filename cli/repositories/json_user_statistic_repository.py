@@ -2,6 +2,7 @@ import json
 import os
 import re
 from datetime import date
+from tempfile import mkstemp
 from typing import List
 
 from cli.models.user_profile import RankSnapshot, SubmissionSnapshot
@@ -69,5 +70,16 @@ class JsonUserStatisticRepository(UserStatisticRepository):
 
         to_write = json.dumps([statistic.to_dict() for statistic in statistics], indent=2)
 
-        with open(filename, "w") as file:
-            file.write(to_write)
+        self._atomic_write(filename, to_write)
+
+    def _atomic_write(self, filename: str, payload: str) -> None:
+        file_descriptor, temp_file_name = mkstemp(dir=os.path.dirname(filename))
+
+        try:
+            with os.fdopen(file_descriptor, "w", encoding="utf-8") as file:
+                file.write(payload)
+
+            os.replace(temp_file_name, filename)
+        except BaseException:
+            os.remove(temp_file_name)
+            raise
