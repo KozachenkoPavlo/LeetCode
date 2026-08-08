@@ -22,28 +22,27 @@ class Solution:
         root = TrieNode()
         height = len(board)
         width = len(board[0])
-        visited = set()
         result = set()
 
         for word in words:
             root.insert(word)
 
         def dfs(row: int, col: int, node: TrieNode):
-            if (0 > row or row >= height or 0 > col or col >= width or (row, col) in visited or board[row][
-                col] not in node.children):
+            if 0 > row or row >= height or 0 > col or col >= width or board[row][col] not in node.children:
                 return
 
-            visited.add((row, col))
+            key = board[row][col]
+            board[row][col] = "*"
 
-            if word := node.children[board[row][col]].word:
+            if word := node.children[key].word:
                 result.add(word)
 
-            dfs(row + 1, col, node.children[board[row][col]])
-            dfs(row - 1, col, node.children[board[row][col]])
-            dfs(row, col + 1, node.children[board[row][col]])
-            dfs(row, col - 1, node.children[board[row][col]])
+            dfs(row + 1, col, node.children[key])
+            dfs(row - 1, col, node.children[key])
+            dfs(row, col + 1, node.children[key])
+            dfs(row, col - 1, node.children[key])
 
-            visited.remove((row, col))
+            board[row][col] = key
 
         for i in range(height):
             for j in range(width):
