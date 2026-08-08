@@ -51,15 +51,16 @@ class Solution:
 
             key = board[row][col]
             board[row][col] = "*"
+            child_node = node.children[key]
 
             if word := node.children[key].word:
                 result.add(word)
                 root.remove(word)
 
-            dfs(row + 1, col, node.children[key])
-            dfs(row - 1, col, node.children[key])
-            dfs(row, col + 1, node.children[key])
-            dfs(row, col - 1, node.children[key])
+            dfs(row + 1, col, child_node)
+            dfs(row - 1, col, child_node)
+            dfs(row, col + 1, child_node)
+            dfs(row, col - 1, child_node)
 
             board[row][col] = key
 
