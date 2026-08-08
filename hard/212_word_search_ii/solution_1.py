@@ -4,7 +4,7 @@ from typing import List
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.is_word = False
+        self.word = None
 
     def insert(self, word: str) -> None:
         path = self
@@ -14,7 +14,7 @@ class TrieNode:
                 path.children[w] = TrieNode()
             path = path.children[w]
 
-        path.is_word = True
+        path.word = word
 
 
 class Solution:
@@ -28,25 +28,25 @@ class Solution:
         for word in words:
             root.insert(word)
 
-        def dfs(row: int, col: int, node: TrieNode, word: str):
+        def dfs(row: int, col: int, node: TrieNode):
             if (0 > row or row >= height or 0 > col or col >= width or (row, col) in visited or board[row][
                 col] not in node.children):
                 return
 
             visited.add((row, col))
 
-            if node.children[board[row][col]].is_word:
-                result.add(word + board[row][col])
+            if word := node.children[board[row][col]].word:
+                result.add(word)
 
-            dfs(row + 1, col, node.children[board[row][col]], word + board[row][col])
-            dfs(row - 1, col, node.children[board[row][col]], word + board[row][col])
-            dfs(row, col + 1, node.children[board[row][col]], word + board[row][col])
-            dfs(row, col - 1, node.children[board[row][col]], word + board[row][col])
+            dfs(row + 1, col, node.children[board[row][col]])
+            dfs(row - 1, col, node.children[board[row][col]])
+            dfs(row, col + 1, node.children[board[row][col]])
+            dfs(row, col - 1, node.children[board[row][col]])
 
             visited.remove((row, col))
 
         for i in range(height):
             for j in range(width):
-                dfs(i, j, root, "")
+                dfs(i, j, root)
 
         return list(result)
