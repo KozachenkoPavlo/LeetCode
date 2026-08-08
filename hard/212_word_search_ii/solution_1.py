@@ -22,7 +22,7 @@ class Solution:
         root = TrieNode()
         height = len(board)
         width = len(board[0])
-        result = set()
+        result = []
 
         for word in words:
             root.insert(word)
@@ -33,14 +33,19 @@ class Solution:
 
             key = board[row][col]
             board[row][col] = "*"
+            child_node = node.children[key]
 
             if word := node.children[key].word:
-                result.add(word)
+                result.append(word)
+                node.children[key].word = None
 
-            dfs(row + 1, col, node.children[key])
-            dfs(row - 1, col, node.children[key])
-            dfs(row, col + 1, node.children[key])
-            dfs(row, col - 1, node.children[key])
+            dfs(row + 1, col, child_node)
+            dfs(row - 1, col, child_node)
+            dfs(row, col + 1, child_node)
+            dfs(row, col - 1, child_node)
+
+            if len(node.children[key].children) == 0:
+                del node.children[key]
 
             board[row][col] = key
 
@@ -48,4 +53,4 @@ class Solution:
             for j in range(width):
                 dfs(i, j, root)
 
-        return list(result)
+        return result
