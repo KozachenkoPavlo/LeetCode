@@ -1,0 +1,24 @@
+from typing import List
+
+
+class Solution:
+    # Time: O(N * 2 ** N)
+    # Space: O(N * 2 ** N)
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        subset = []
+
+        def backtrack(i: int) -> None:
+            if i == len(nums):
+                result.append(subset[:])
+                return
+
+            subset.append(nums[i])
+            backtrack(i + 1)
+
+            subset.pop()
+            backtrack(i + 1)
+
+        backtrack(0)
+
+        return result
