@@ -13,30 +13,26 @@ class Solution:
 
         nums.sort()
 
-        def backtrace(pointer: int = 0) -> bool:
+        def backtrace(pointer: int = 0):
             nonlocal temp_sum
-
-            if temp_sum > target:
-                return False
 
             if temp_sum == target:
                 result.append(temp_nums.copy())
-                return False
+                return
 
             for index in range(pointer, len(nums)):
                 num = nums[index]
+
+                if temp_sum + num > target:
+                    break  # We can do it because the list is sorted
+
                 temp_nums.append(num)
                 temp_sum += num
 
-                to_continue = backtrace(index)
+                backtrace(index)
 
                 temp_nums.pop()
                 temp_sum -= num
-
-                if not to_continue:
-                    break
-
-            return True
 
         backtrace()
 
