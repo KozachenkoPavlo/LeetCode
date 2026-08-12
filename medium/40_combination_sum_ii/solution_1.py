@@ -2,6 +2,9 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N * (2 ** N))
+    # 2, because we take or skip a candidate. N for .copy()
+    # Space: O(N)
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         result = []
         target_sum = 0
