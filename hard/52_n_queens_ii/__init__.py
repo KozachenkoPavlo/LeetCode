@@ -1,0 +1,4 @@
+tags = [
+    "Backtracking",
+    "Algorithm X",
+]
