@@ -2,46 +2,44 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N!)
+    # Space: O(N**2), board
     def solveNQueens(self, n: int) -> List[List[str]]:
         board = [["."] * n for _ in range(n)]
+        used_rows = set()
+        used_diagonals_main = set()
+        used_diagonals_anti = set()
         result = []
 
-        def is_save(row: int, col: int) -> bool:
-            # horizontally
-            for c in range(col):
-                if board[row][c] == "Q":
-                    return False
+        def is_safe(row: int, col: int) -> bool:
+            if row in used_rows:
+                return False
 
-            # top-left diagonally
-            c = col - 1
-            r = row - 1
-            while c > -1 and r > -1:
-                if board[r][c] == "Q":
-                    return False
-                c -= 1
-                r -= 1
+            if row - col in used_diagonals_main:
+                return False
 
-            # bottom-left diagonally
-            c = col - 1
-            r = row + 1
-            while c > -1 and r < n:
-                if board[r][c] == "Q":
-                    return False
-                c -= 1
-                r += 1
+            if row + col in used_diagonals_anti:
+                return False
 
             return True
 
         def backtrack(col: int):
+            if col == n:
+                result.append(["".join(row) for row in board])
+                return
+
             for row in range(n):
-                if is_save(row, col):
+                if is_safe(row, col):
                     board[row][col] = "Q"
+                    used_rows.add(row)
+                    used_diagonals_main.add(row - col)
+                    used_diagonals_anti.add(row + col)
 
-                    if col + 1 == n:
-                        result.append(["".join(row) for row in board])
-                    else:
-                        backtrack(col + 1)
+                    backtrack(col + 1)
 
+                    used_diagonals_anti.remove(row + col)
+                    used_diagonals_main.remove(row - col)
+                    used_rows.remove(row)
                     board[row][col] = "."
 
         backtrack(0)
