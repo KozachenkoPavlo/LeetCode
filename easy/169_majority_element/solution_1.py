@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     # Time: O(N)
     # Space: O(N)
@@ -16,3 +19,5 @@ class Solution:
                     return num
             else:
                 registry[num] = 1
+
+        return -1
