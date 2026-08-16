@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N * 2 ** N)
+    # Space: O(N ** 2)
     def partition(self, s: str) -> List[List[str]]:
         result = []
         current = []
