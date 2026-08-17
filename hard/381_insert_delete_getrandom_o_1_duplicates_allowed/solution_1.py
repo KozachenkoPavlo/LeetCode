@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 from typing import Set, List, Dict
 
 
@@ -6,41 +7,28 @@ class RandomizedCollection:
     # Space: O(2 * N) -> O(N)
     def __init__(self):
         self.array: List[int] = list()
-        self.registry: Dict[int, Set] = dict()
+        self.registry: Dict[int, Set] = defaultdict(set)
 
     # Time: O(1)
     def insert(self, value) -> bool:
-        result = False
-
-        if value in self.registry:
-            self.registry[value].add(len(self.array))
-        else:
-            result = True
-            self.registry[value] = {len(self.array)}
-
+        self.registry[value].add(len(self.array))
         self.array.append(value)
 
-        return result
+        return len(self.registry[value]) == 1
 
     # Time: O(1)
     def remove(self, value) -> bool:
         if value not in self.registry:
             return False
 
-        if len(self.array) == 1:
-            self.array.pop()
-            del self.registry[value]
-            return True
+        remove_index, last_value = self.registry[value].pop(), self.array[-1]
 
-        index = self.registry[value].pop()
+        self.array[remove_index] = last_value
+        self.registry[last_value].add(remove_index)
+        self.registry[last_value].discard(len(self.array) - 1)
+
         if not self.registry[value]:
             del self.registry[value]
-
-        last_value = self.array[-1]
-        if index != len(self.array) - 1:
-            self.array[index] = self.array[-1]
-            self.registry[last_value].remove(len(self.array) - 1)
-            self.registry[last_value].add(index)
 
         self.array.pop()
 
@@ -48,5 +36,7 @@ class RandomizedCollection:
 
     # Time: O(1)
     def getRandom(self) -> int:
-        index = random.randint(0, len(self.array) - 1)
-        return self.array[index]
+        if self.array:
+            return random.choice(self.array)
+
+        return -1
