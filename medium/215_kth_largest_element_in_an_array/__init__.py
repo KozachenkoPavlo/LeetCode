@@ -1,0 +1,7 @@
+tags = [
+    "Array",
+    "Divide and Conquer",
+    "Sorting",
+    "Heap (Priority Queue)",
+    "Quickselect",
+]
