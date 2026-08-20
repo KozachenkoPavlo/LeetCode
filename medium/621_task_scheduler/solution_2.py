@@ -1,5 +1,5 @@
 import heapq
-from collections import Counter
+from collections import Counter, deque
 from typing import List
 
 
@@ -15,20 +15,20 @@ class Solution:
         heapq.heapify(heap)  # O(U)
 
         cpu_cycle = 0
-        processed = []
+        processed = deque()
 
         while heap or processed:  # O(L * N)
             cpu_cycle += 1
 
             while processed and cpu_cycle - processed[0][0] > n:  # O(U)
-                _, value, task = heapq.heappop(processed)  # O(log U)
+                _, value, task = processed.popleft()  # O(1)
                 heapq.heappush(heap, (value, task))  # O(log U)
 
             if heap:
                 value, task = heapq.heappop(heap)  # O(log U)
 
                 if -value > 1:
-                    heapq.heappush(processed, (cpu_cycle, value + 1, task))  # O(log U)
+                    processed.append((cpu_cycle, value + 1, task))  # O(1)
 
         return cpu_cycle
 
