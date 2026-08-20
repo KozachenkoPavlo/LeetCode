@@ -1,0 +1,8 @@
+tags = [
+    "Array",
+    "Hash Table",
+    "Greedy",
+    "Sorting",
+    "Heap (Priority Queue)",
+    "Counting",
+]
