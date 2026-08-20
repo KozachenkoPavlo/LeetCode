@@ -4,7 +4,7 @@ from typing import List
 
 
 class Solution:
-    # Time: O(L * N * U) -> O(L * N)
+    # Time: O(L * U) -> O(L)
     # Space: O(U) -> O(1)
     # Where:
     # L = len(tasks)
@@ -17,7 +17,10 @@ class Solution:
         cpu_cycle = 0
         processed = deque()
 
-        while heap or processed:  # O(L * N)
+        while heap or processed:  # O(L)
+            if not heap and cpu_cycle - processed[0][0] <= n:
+                cpu_cycle = processed[0][0] + n
+
             cpu_cycle += 1
 
             while processed and cpu_cycle - processed[0][0] > n:  # O(U)
