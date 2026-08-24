@@ -1,0 +1,7 @@
+tags = [
+    "Two Pointers",
+    "Design",
+    "Sorting",
+    "Heap (Priority Queue)",
+    "Data Stream",
+]
