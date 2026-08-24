@@ -12,23 +12,24 @@ class Solution:
             for col in range(width):
                 if grid[row][col] == "1":
                     result += 1
+
+                    grid[row][col] = "0"
                     queue.append((row, col))
 
                     while queue:
                         r, c = queue.pop()
 
-                        if grid[r][c] == "0":
-                            continue
-
-                        grid[r][c] = "0"
-
-                        if r > 0:
+                        if r > 0 and grid[r - 1][c] == "1":
+                            grid[r - 1][c] = "0"
                             queue.append((r - 1, c))
-                        if c > 0:
+                        if c > 0 and grid[r][c - 1] == "1":
+                            grid[r][c - 1] = "0"
                             queue.append((r, c - 1))
-                        if r + 1 < height:
+                        if r + 1 < height and grid[r + 1][c] == "1":
+                            grid[r + 1][c] = "0"
                             queue.append((r + 1, c))
-                        if c + 1 < width:
+                        if c + 1 < width and grid[r][c + 1] == "1":
+                            grid[r][c + 1] = "0"
                             queue.append((r, c + 1))
 
         return result
