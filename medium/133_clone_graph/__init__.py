@@ -1,0 +1,6 @@
+tags = [
+    "Hash Table",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Graph Theory",
+]
