@@ -26,11 +26,8 @@ class Solution:
         group_counter = 0
 
         for node in range(n):
-            current_len = len(visited)
-
-            dfs(node)
-
-            if current_len != len(visited):
+            if node not in visited:
                 group_counter += 1
+                dfs(node)
 
         return group_counter
