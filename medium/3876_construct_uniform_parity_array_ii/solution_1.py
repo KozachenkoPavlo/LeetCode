@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    # Time: O(N)
+    # Space: O(N)
     def uniformArray(self, nums1: List[int]) -> bool:
         odd = [num for num in nums1 if num % 2 == 1]
         even = [num for num in nums1 if num % 2 == 0]
